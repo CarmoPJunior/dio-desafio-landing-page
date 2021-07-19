@@ -11,41 +11,28 @@
 
 
         <script>
-            function cadastrarEmail3() {
-              // Pegando os valores dos campos name e qtd
-              let email = document.getElementById('email').value;
+            function cadastrarEmail() {
+                //Pega o email do campo email
+                const email = document.getElementById('email').value;
+                const name = document.getElementById('name').value;
 
-              console.log(email);
-        
-              // Criando uma string com o objeto a ser adicionado no localstorage
-              const dataObj = JSON.stringify({ email });
-        
-              localStorage.setItem('email', dataObj);
+                // Cria o objeto
+                const dataObject = {email, name};
+
+                //Verifica se o local storage está nulo 
+
+                if (localStorage.getItem('emails') === null) {
+                    // Adicionando um array com um objeto no localstorage
+                    localStorage.setItem('emails', JSON.stringify([dataObject]));
+                } else {
+                    // Copia o array do localstorage e adiciona um novo objeto ao final.
+                    localStorage.setItem(
+                        'emails',
+                        JSON.stringify([...JSON.parse(localStorage.getItem('emails')), dataObject ])
+                    );
+                }
             }
         </script>
-
-    <script>
-        function cadastrarEmail() {
-            //Pega o email do campo email
-            const email = document.getElementById('email').value;
-
-            // Cria o objeto
-            const dataObject = {email};
-
-            //Verifica se o local storage está nulo 
-
-            if (localStorage.getItem('emails') === null) {
-                // Adicionando um array com um objeto no localstorage
-                localStorage.setItem('emails', JSON.stringify([dataObject]));
-            } else {
-                // Copia o array do localstorage e adiciona um novo objeto ao final.
-                localStorage.setItem(
-                    'emails',
-                    JSON.stringify([...JSON.parse(localStorage.getItem('emails')), dataObject ])
-                );
-            }
-        }
-    </script>
 
     </head>
 
@@ -66,7 +53,7 @@
         <section class="titulo-promocao">        
 
             <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-                <h1 class="display-1  text-bold">Promoção</h1>
+                <h1 class="display-1  text-bold">Black Friday</h1>
                 <p class="fs-5 text-muted">Obtenha novos conhecimentos com a grande Promoção de cursos!</p>
                 <br>
                 <h2 class="badge badge--promo-tag-84 badge-title">
@@ -235,6 +222,12 @@
                 <h1 class="display-4 fw-normal">Contato</h1>
                 <p class="fs-5 text-muted">Cadastre seu email para obter mais informações.</p>
 
+                <br>
+                <p>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="name" placeholder="Nome">
+                    </div>
+                </p>         
                 <br>
                 <p>
                     <div class="form-floating">
