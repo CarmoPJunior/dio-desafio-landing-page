@@ -9,6 +9,44 @@
 
         <link rel="stylesheet" href="css/geral.css" >
 
+
+        <script>
+            function cadastrarEmail3() {
+              // Pegando os valores dos campos name e qtd
+              let email = document.getElementById('email').value;
+
+              console.log(email);
+        
+              // Criando uma string com o objeto a ser adicionado no localstorage
+              const dataObj = JSON.stringify({ email });
+        
+              localStorage.setItem('email', dataObj);
+            }
+        </script>
+
+    <script>
+        function cadastrarEmail() {
+            //Pega o email do campo email
+            const email = document.getElementById('email').value;
+
+            // Cria o objeto
+            const dataObject = {email};
+
+            //Verifica se o local storage está nulo 
+
+            if (localStorage.getItem('emails') === null) {
+                // Adicionando um array com um objeto no localstorage
+                localStorage.setItem('emails', JSON.stringify([dataObject]));
+            } else {
+                // Copia o array do localstorage e adiciona um novo objeto ao final.
+                localStorage.setItem(
+                    'emails',
+                    JSON.stringify([...JSON.parse(localStorage.getItem('emails')), dataObject ])
+                );
+            }
+        }
+    </script>
+
     </head>
 
     <body>
@@ -200,11 +238,11 @@
                 <br>
                 <p>
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <input type="email" class="form-control" id="email" placeholder="name@example.com">
                     </div>
                 </p>                
                 <br>
-                <button class="btn btn-success">Cadastrar</button>
+                <button class="btn btn-success"  onclick="cadastrarEmail();">Cadastrar</button>
             </div>
 
         </section>
